@@ -7,9 +7,8 @@ if not AS:IsAddonLODorEnabled("AtlasLoot") then return end
 local select = select
 local unpack = unpack
 
--- AtlasLoot Enhanced 5.11.04
--- https://www.curseforge.com/wow/addons/atlasloot-enhanced/files/445202
-
+--
+--https://github.com/Mr-Dan/AtlasLoot-Sirus
 S:AddCallbackForAddon("AtlasLoot", "AtlasLoot", function()
 	if not E.private.addOnSkins.AtlasLoot then return end
 
@@ -121,6 +120,11 @@ S:AddCallbackForAddon("AtlasLoot", "AtlasLoot", function()
 	S:HandleCheckBox(AtlasLootOptionsFrameEquipCompare)
 	S:HandleCheckBox(AtlasLootOptionsFrameItemSpam)
 	S:HandleCheckBox(AtlasLootOptionsFrameHidePanel)
+	-- if AtlasLootWishlistOwnOptionsScrollFrameSharedCheckBox then
+	-- -- S:HandleCheckBox(AtlasLootWishlistOwnOptionsScrollFrameSharedCheckBox)
+	-- end
+
+	-- S:HandleCheckBox(AtlasLootOptionsCheckAxeWeaponsMeele)
 
 	S:HandleDropDownBox(AtlasLoot_SelectLootBrowserStyle)
 	S:HandleDropDownBox(AtlasLoot_CraftingLink)
@@ -183,6 +187,161 @@ S:AddCallbackForAddon("AtlasLoot", "AtlasLoot", function()
 	end
 
 	AS:SkinLibrary("Dewdrop-2.0")
+
+
+--- 2st frame
+	local optcheckboxes = {
+		"AtlasLootOptionsCheckClothArmor",
+		"AtlasLootOptionsCheckLeatherArmor",
+		"AtlasLootOptionsCheckMailArmor",
+		"AtlasLootOptionsCheckPlateArmor",
+
+		"AtlasLootOptionsCheckHeld in Off-HandWeaponsMeele",
+		"AtlasLootOptionsCheckDaggerWeaponsMeele",
+		"AtlasLootOptionsCheckMaceWeaponsMeele",
+		"AtlasLootOptionsCheckStaffWeaponsMeele",
+		"AtlasLootOptionsCheckAxeWeaponsMeele",
+		"AtlasLootOptionsCheckPolearmWeaponsMeele",
+		"AtlasLootOptionsCheckSwordWeaponsMeele",
+		"AtlasLootOptionsCheckShieldWeaponsMeele",
+		"AtlasLootOptionsCheckFist WeaponWeaponsMeele",
+		"AtlasLootOptionsCheckMaceWeaponsMeeleTwoHand",
+		"AtlasLootOptionsCheckSwordWeaponsMeeleTwoHand",
+		"AtlasLootOptionsCheckWandWeaponsRanged",
+		"AtlasLootOptionsCheckCrossbowWeaponsRanged",
+		"AtlasLootOptionsCheckThrownWeaponsRanged",
+		"AtlasLootOptionsCheckIdolRelics",
+		"AtlasLootOptionsCheckLibramRelics",
+		"AtlasLootOptionsCheckRingOther",
+		"AtlasLootOptionsCheckNeckOther",
+
+		"AtlasLootOptionsCheckAxeWeaponsMeeleTwoHand",
+		"AtlasLootOptionsCheckBowWeaponsRanged",
+		"AtlasLootOptionsCheckGunWeaponsRanged",
+		"AtlasLootOptionsCheckTotemRelics",
+		"AtlasLootOptionsCheckSigilsRelics",
+		"AtlasLootOptionsCheckTrinketOther",
+		"AtlasLootOptionsCheckBackOther",
+
+		-- spisok need
+		"AtlasLootOptionsWishListMark",
+		"AtlasLootOptionsWishListMarkOwn",
+		"AtlasLootOptionsWishListMarkAll",
+		"AtlasLootOptionsWishListShare",
+		"AtlasLootOptionsWishListShareInCombat",
+		"AtlasLootOptionsWishListAutoAdd",
+
+		-- "AtlasLootOptionsCheckThrownWeaponsRanged",
+		-- "AtlasLootOptionsCheckThrownWeaponsRanged",
+		-- "AtlasLootOptionsCheckThrownWeaponsRanged",
+		-- "AtlasLootOptionsCheckThrownWeaponsRanged",
+		-- "AtlasLootOptionsCheckThrownWeaponsRanged",
+		-- "AtlasLootOptionsCheckThrownWeaponsRanged",
+		-- "AtlasLootOptionsCheckThrownWeaponsRanged",
+		-- "AtlasLootOptionsCheckThrownWeaponsRanged",
+
+		}
+		for _,optcheckbox in ipairs(optcheckboxes) do
+			optcheckbox = _G[optcheckbox]
+					if optcheckbox then
+						S:HandleButton(optcheckbox)
+						optcheckbox:Size(21)
+					end
+		end
+
+	local optscrollframes = {
+		"AtlasLootFilterOptionsScrollFrameScrollBar",
+		--2snd frame
+		"AtlasLootWishlistOwnOptionsScrollFrameScrollBar",
+
+		"AtlasLootWishlistAddFrameIconListScrollBar",
+
+		}
+		for _,scrollframe in ipairs(optscrollframes) do
+			scrollframe = _G[scrollframe]
+					if scrollframe then
+						S:HandleScrollBar(scrollframe)
+					end
+		end
+
+	local buttons = {
+		"AtlasLootFilterOptionsFilterDisableButton",
+		"AtlasLootFilterOptionsClassFilterLoadButton",
+		"AtlasLootWishlistOwnOptionsScrollFrameShowAllWishlistsButton",
+		"AtlasLootWishlistOwnOptionsScrollFrameShowOwnWishlistsButton",
+		"AtlasLootWishlistOwnOptionsScrollFrameShowSharedWishlistsButton",
+		"AtlasLootWishlistOwnOptionsScrollFrameAddWishlistButton",
+
+		"AtlasLootAddEditWishList",
+		"AtlasLootAddWishListNameAddWishlistIcons",
+
+		}
+		for _,button in ipairs(buttons) do
+			button = _G[button]
+					if button then
+						S:HandleButton(button)
+					end
+		end
+
+	local closebuttons = {
+		"AtlasLootAddWishListNameCloseButton",
+
+		}
+		for _,closebutton in ipairs(closebuttons) do
+			closebutton = _G[closebutton]
+					if closebutton then
+						S:HandleCloseButton(closebutton)
+					end
+		end
+
+	local frames = {
+		"AtlasLootWishList_AddFrame",
+
+		}
+		for _,frame in ipairs(frames) do
+			frame = _G[frame]
+			if frame then
+				frame:StripTextures()
+				frame:CreateBackdrop("Transparent")
+			end
+		end
+
+	local editboxes = {
+		"AtlasLootWishListNewName",
+		}
+		for _,editbox in ipairs(editboxes) do
+			editbox = _G[editbox]
+			if editbox then
+				S:HandleEditBox(editbox)
+				editbox:SetHeight(28)
+			end
+		end
+
+	local function changelogatasloothook()
+		local dropdowns = {
+			"ChangelogDropDown",
+			}
+			for _,dropdown in ipairs(dropdowns) do
+				dropdown = _G[dropdown]
+				if dropdown then
+					S:HandleDropDownBox(dropdown)
+					local dropdownArrowColor = {1, 0.8, 0}
+					S:HandleNextPrevButton(ChangelogDropDownButton, "down", dropdownArrowColor)
+					ChangelogDropDown:Size(25)
+				end
+			end
+			S:HandleScrollBar(_G["AtlasLootChangelog_ScrollFrameScrollBar"])
+	end
+
+	local function helpatasloothook()
+		S:HandleScrollBar(_G["AtlasLootHelpFrame_HelpTextFrameScrollScrollBar"])
+	end
+
+
+
+hooksecurefunc("AtlasLoot_DisplayChangelog",changelogatasloothook)
+hooksecurefunc("AtlasLoot_DisplayHelp",helpatasloothook)
+
 end)
 
 S:AddCallbackForAddon("AtlasLootFu", "AtlasLootFu", function()
