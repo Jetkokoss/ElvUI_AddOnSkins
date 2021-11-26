@@ -4,7 +4,8 @@ local AS = E:GetModule("AddOnSkins")
 
 if not AS:IsAddonLODorEnabled("Atlas") then return end
 
--- Atlas 1.18.1
+-- Atlas 1.18.2 for sirus
+--https://github.com/fxpw/Atlas-Sirus 
 
 S:AddCallbackForAddon("Atlas", "Atlas", function()
 	if not E.private.addOnSkins.Atlas then return end
@@ -82,4 +83,53 @@ S:AddCallbackForAddon("Atlas", "Atlas", function()
 	S:HandleDropDownBox(AtlasOptionsFrameDropDownCats)
 
 	S:HandleButton(AtlasOptionsFrameResetPosition)
+
+
+
+	AtlasLootPanel:HookScript("OnShow", function()
+		-- _G["AtlasLootDefaultFrameSearchButtonFilterAtlas"]:StripTextures()
+		S:HandleButton(_G["AtlasLootDefaultFrameSearchButtonFilterAtlas"])
+		_G["AtlasLootDefaultFrameSearchButtonFilterAtlas"]:ClearAllPoints()
+		_G["AtlasLootDefaultFrameSearchButtonFilterAtlas"]:SetPoint("LEFT", AtlasLootSearchButton, "RIGHT", -90, 0)
+		-- _G["AtlasLootDefaultFrameSearchButtonFilterAtlas"]:Width(25)
+		_G["AtlasLootDefaultFrameSearchButtonFilterAtlas"]:SetText("ф")
+			_G["AtlasLootDefaultFrameSearchButtonFilterAtlas"]:HookScript("OnClick",function()
+				_G["AtlasLootDefaultFrameFilterAtlas"]:StripTextures()
+				_G["AtlasLootDefaultFrameFilterAtlas"]:CreateBackdrop("Transparent")
+
+				local checkboxes = {
+					"AtlasLootCheckButtonFilterEnableAtlas",
+					"AtlasLootCheckButtonClothAtlas",
+					"AtlasLootCheckButtonLeatherAtlas",
+					"AtlasLootCheckButtonMailAtlas",
+					"AtlasLootCheckButtonPlateAtlas",
+					"AtlasLootCheckButtonWeaponAtlas",
+					"AtlasLootCheckButton2WeaponAtlas",
+					"AtlasLootCheckButtonMainHandAtlas",
+					"AtlasLootCheckButtonOffHandAtlas",
+					-- "AtlasLootCheckButtonFilterEnable",
+					-- "AtlasLootCheckButtonFilterEnable",
+					-- "AtlasLootCheckButtonFilterEnable",
+					-- "AtlasLootCheckButtonFilterEnable",
+				}
+				for _,checkbox in ipairs(checkboxes) do
+					checkbox = _G[checkbox]
+					if checkbox then
+						S:HandleCheckBox(checkbox)					
+					end
+				end
+
+				local editboxes = {
+					"AtlasLootDefaultFrameFilterBoxIlvlFromAtlas",
+					"AtlasLootDefaultFrameFilterBoxIlvlBeforeAtlas",
+					}
+					for _,editbox in ipairs(editboxes) do
+						editbox = _G[editbox]
+						if editbox then
+							S:HandleEditBox(editbox)
+						end
+					end
+		end)
+
+	end)
 end)

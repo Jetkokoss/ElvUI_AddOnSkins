@@ -9,6 +9,7 @@ local unpack = unpack
 
 --
 --https://github.com/Mr-Dan/AtlasLoot-Sirus
+
 S:AddCallbackForAddon("AtlasLoot", "AtlasLoot", function()
 	if not E.private.addOnSkins.AtlasLoot then return end
 
@@ -341,6 +342,54 @@ S:AddCallbackForAddon("AtlasLoot", "AtlasLoot", function()
 
 hooksecurefunc("AtlasLoot_DisplayChangelog",changelogatasloothook)
 hooksecurefunc("AtlasLoot_DisplayHelp",helpatasloothook)
+
+
+	AtlasLootDefaultFrame:HookScript("OnShow", function()
+		-- _G["AtlasLootDefaultFrameSearchButtonFilter"]:StripTextures()
+		S:HandleButton(_G["AtlasLootDefaultFrameSearchButtonFilter"])
+		_G["AtlasLootDefaultFrameSearchButtonFilter"]:ClearAllPoints()
+		_G["AtlasLootDefaultFrameSearchButtonFilter"]:SetPoint("LEFT", AtlasLootDefaultFrameSearchBox, "RIGHT", -20, 0)
+		_G["AtlasLootDefaultFrameSearchButtonFilter"]:SetText("ф")
+			_G["AtlasLootDefaultFrameSearchButtonFilter"]:HookScript("OnClick",function()
+				_G["AtlasLootDefaultFrameFilter"]:StripTextures()
+				_G["AtlasLootDefaultFrameFilter"]:CreateBackdrop("Transparent")
+
+				local checkboxes = {
+					"AtlasLootCheckButtonFilterEnable",
+					"AtlasLootCheckButtonCloth",
+					"AtlasLootCheckButtonLeather",
+					"AtlasLootCheckButtonMail",
+					"AtlasLootCheckButtonPlate",
+					"AtlasLootCheckButtonWeapon",
+					"AtlasLootCheckButton2Weapon",
+					"AtlasLootCheckButtonMainHand",
+					"AtlasLootCheckButtonOffHand",
+					-- "AtlasLootCheckButtonFilterEnable",
+					-- "AtlasLootCheckButtonFilterEnable",
+					-- "AtlasLootCheckButtonFilterEnable",
+					-- "AtlasLootCheckButtonFilterEnable",
+				}
+				for _,checkbox in ipairs(checkboxes) do
+					checkbox = _G[checkbox]
+					if checkbox then
+						S:HandleCheckBox(checkbox)					
+					end
+				end
+
+				local editboxes = {
+					"AtlasLootDefaultFrameFilterBoxIlvlFrom",
+					"AtlasLootDefaultFrameFilterBoxIlvlBefore",
+					}
+					for _,editbox in ipairs(editboxes) do
+						editbox = _G[editbox]
+						if editbox then
+							S:HandleEditBox(editbox)
+						end
+					end
+		end)
+
+	end)
+
 
 end)
 
