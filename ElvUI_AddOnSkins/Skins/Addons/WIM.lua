@@ -12,18 +12,18 @@ local format = string.format
 S:AddCallbackForAddon("WIM", "WIM", function()
 	if not E.private.addOnSkins.WIM then return end
 
-	local function formatDetails(window, guild, level, race, class)
-		if guild == "" then
-			return format("|cffffffff %s %s %s|r", level, race, class)
-		else
-			return format("|cffffffff<%s> %s %s %s|r", guild, level, race, class)
-		end
+	local function formatDetails(window, guild ,level, race, class)
+		-- if guild == "" then
+		-- 	return format("|cffffffff %s %s %s|r", level, race, class)
+		-- else
+			return format("|cffffffff %s %s %s|r",  level, race, class)
+		-- end
 	end
 
 	local WIM_Elvui = {
 		title = "WIM ElvUI",
-		version = "1.0.0",
-		author = "Divico",
+		version = "1.0.1",
+		author = "Divico , fxpw",
 		website = "",
 		message_window = {
 			texture = "Interface\\AddOns\\ElvUI_AddOnSkins\\media\\wim\\message_window",
@@ -310,4 +310,27 @@ S:AddCallbackForAddon("WIM", "WIM", function()
 	TutorialFrameTop:Hide()
 	TutorialFrameBottom.Show = E.noop
 	TutorialFrameBottom:Hide()
+
+	local WIMMenu = _G["WIM3Menu"]
+	local WIMGroup1 = _G["WIM3MenuGroup1"]
+	local WIMGroup1T = _G["WIM3MenuGroup1Title"]
+		local function wimhookskindialog()
+			
+			WIMMenu:StripTextures()
+			WIMMenu:CreateBackdrop("Transparent")
+			
+			WIMGroup1:StripTextures()
+			WIMGroup1T:StripTextures()
+
+			for i = 1,99 do
+				local button =_G["WIM3MenuButton"..i] 
+				if button then
+					S:HandleButton(button)
+				else break
+				end
+			end
+		end
+		
+		WIMMenu:HookScript("OnUpdate",wimhookskindialog)
+
 end)

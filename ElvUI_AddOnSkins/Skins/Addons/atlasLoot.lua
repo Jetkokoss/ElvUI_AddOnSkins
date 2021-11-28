@@ -390,6 +390,21 @@ hooksecurefunc("AtlasLoot_DisplayHelp",helpatasloothook)
 
 	end)
 
+	AtlasLootDefaultFrame_LockButton:Point("BOTTOM", AtlasLootDefaultFrame_CloseButton, "BOTTOM", 0, -20)
+	AtlasLootDefaultFrame_LockButton:SetHitRectInsets(6, 6, 6, 6)
+
+	ALLockButtonTex:SetInside(AtlasLootDefaultFrame_LockButton, 10, 10)
+	ALLockButtonTexP:SetInside(AtlasLootDefaultFrame_LockButton, 10, 10)
+	ALLockButtonTex:SetTexCoord(.36, .65, .32, .73)
+	ALLockButtonTexP:SetTexCoord(.36, .60, .38, .76)
+
+	hooksecurefunc("AtlasLoot_UpdateLock", function()
+		ALLockButtonTex:SetDesaturated(true)
+		ALLockButtonTexP:SetDesaturated(true)
+	end)
+	AtlasLoot_UpdateLock()
+
+
 
 end)
 
