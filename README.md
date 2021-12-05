@@ -1,6 +1,7 @@
 [![Discord](https://discordapp.com/api/guilds/259362419372064778/widget.png?style=shield)](https://discord.gg/7cjU9xvcQY)
 
-# ElvUI_AddOnSkins - Wrath of the Lich King (3.3.5a)
+# ElvUI_AddOnSkins - Wrath of the Lich King (3.3.5a) version for sirus
+Тема на форуме (https://forum.sirus.su/threads/addon-elvui-for-sirus.185110/
 
 ElvUI_AddOnSkins is a plugin for [ElvUI](https://github.com/ElvUI-WotLK/ElvUI) which skins other AddOns to make them look like ElvUI.
 
