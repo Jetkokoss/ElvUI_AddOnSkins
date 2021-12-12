@@ -113,6 +113,7 @@ local addonList = {
 	"TwitchEmotes",
 	"BigBrother",
 	"ItemRack",
+	"EavesDrop",
 
 	
 }

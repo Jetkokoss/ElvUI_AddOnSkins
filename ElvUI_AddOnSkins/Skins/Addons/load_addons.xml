@@ -102,5 +102,6 @@
 	<Script file="TwitchEmotes.lua"/>
 	<Script file="BigBrother.lua"/>
 	<Script file="ItemRack.lua"/>
+	<Script file="EavesDrop.lua"/>
 	
 </Ui>
