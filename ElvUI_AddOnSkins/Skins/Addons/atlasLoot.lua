@@ -345,11 +345,14 @@ hooksecurefunc("AtlasLoot_DisplayHelp",helpatasloothook)
 
 
 	AtlasLootDefaultFrame:HookScript("OnShow", function()
-		-- _G["AtlasLootDefaultFrameSearchButtonFilter"]:StripTextures()
-		S:HandleButton(_G["AtlasLootDefaultFrameSearchButtonFilter"])
+		_G["AtlasLootDefaultFrameSearchButtonFilter"]:StripTextures()
+		-- S:HandleButton(_G["AtlasLootDefaultFrameSearchButtonFilter"])
 		_G["AtlasLootDefaultFrameSearchButtonFilter"]:ClearAllPoints()
 		_G["AtlasLootDefaultFrameSearchButtonFilter"]:SetPoint("LEFT", AtlasLootDefaultFrameSearchBox, "RIGHT", -20, 0)
-		_G["AtlasLootDefaultFrameSearchButtonFilter"]:SetText("ф")
+		local normtex = _G["AtlasLootDefaultFrameSearchButtonFilter"]:SetNormalTexture("Interface\\Buttons\\on")
+		local pushtex =_G["AtlasLootDefaultFrameSearchButtonFilter"]:SetPushedTexture("Interface\\Buttons\\click")
+		-- _G["AtlasLootDefaultFrameSearchButtonFilter"]:SetTexCoord(unpack(E.TexCoords))
+		-- _G["AtlasLootDefaultFrameSearchButtonFilter"]:SetText("ф")
 			_G["AtlasLootDefaultFrameSearchButtonFilter"]:HookScript("OnClick",function()
 				_G["AtlasLootDefaultFrameFilter"]:StripTextures()
 				_G["AtlasLootDefaultFrameFilter"]:CreateBackdrop("Transparent")
@@ -379,6 +382,8 @@ hooksecurefunc("AtlasLoot_DisplayHelp",helpatasloothook)
 				local editboxes = {
 					"AtlasLootDefaultFrameFilterBoxIlvlFrom",
 					"AtlasLootDefaultFrameFilterBoxIlvlBefore",
+					"AtlasLootDefaultFrameFilterBoxlvlFrom",
+					"AtlasLootDefaultFrameFilterBoxlvlBefore",
 					}
 					for _,editbox in ipairs(editboxes) do
 						editbox = _G[editbox]
