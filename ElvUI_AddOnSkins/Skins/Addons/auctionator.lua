@@ -696,6 +696,12 @@ end
 
 S:AddCallbackForAddon("Auctionator", "Auctionator", function()
 	if not E.private.addOnSkins.Auctionator then return end
+	TradeSkillFrame:HookScript("OnUpdate", function()
+		if AuctionatorTradeSkillSearch then
+		S:HandleButton(AuctionatorTradeSkillSearch)
+		end
+	end)
+
 	AuctionHouseFrame:HookScript("OnUpdate", function()
 		S:HandleTab(AuctionatorTabs_ShoppingLists)
 		S:HandleTab(AuctionatorTabs_Selling)
