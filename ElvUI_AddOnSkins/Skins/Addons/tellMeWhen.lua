@@ -15,7 +15,7 @@ S:AddCallbackForAddon("TellMeWhen", "TellMeWhen", function()
 
 	TELLMEWHEN_ICONSPACING = E.Border
 
-	if TELLMEWHEN_VERSION == "1.2.4" or TELLMEWHEN_VERSION == "2.3.3.5а" or TELLMEWHEN_VERSION == "1.1"  then
+	if TELLMEWHEN_VERSION == "1.2.4" or TELLMEWHEN_VERSION == "2.3.3.5а" then
 		hooksecurefunc("TellMeWhen_Group_Update", function(groupID)
 			local group = TellMeWhen_Settings.Groups[groupID]
 			if not group.Enabled then return end
@@ -207,7 +207,7 @@ end)
 
 
 	-- ---main spec
-	
+
 	-- S:HandleCheckBox(InterfaceOptionsTellMeWhenPanelGroup1PrimarySpecButton)
 	-- S:HandleCheckBox(InterfaceOptionsTellMeWhenPanelGroup2PrimarySpecButton)
 	-- S:HandleCheckBox(InterfaceOptionsTellMeWhenPanelGroup3PrimarySpecButton)

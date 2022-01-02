@@ -701,8 +701,10 @@ S:AddCallbackForAddon("Auctionator", "Auctionator", function()
 		S:HandleButton(AuctionatorTradeSkillSearch)
 		end
 	end)
-
+	
 	AuctionHouseFrame:HookScript("OnUpdate", function()
+
+		
 		S:HandleTab(AuctionatorTabs_ShoppingLists)
 		S:HandleTab(AuctionatorTabs_Selling)
 		S:HandleTab(AuctionatorTabs_Cancelling)

@@ -522,7 +522,7 @@ local function getOptions()
 			embed = {
 				order = 3,
 				type = "group",
-				name = "Embed Settings",
+				name = L["Embed Settings"],
 				get = function(info) return E.db.addOnSkins.embed[info[#info]] end,
 				set = function(info, value)
 					E.db.addOnSkins.embed[info[#info]] = value
@@ -532,7 +532,7 @@ local function getOptions()
 					desc = {
 						order = 1,
 						type = "description",
-						name = "Settings to control Embedded AddOns: Available Embeds: Omen | Skada | Recount ",
+						name = L["Settings to control Embedded AddOns: Available Embeds: Omen | Skada | Recount "],
 					},
 					embedType = {
 						order = 2,
@@ -577,19 +577,19 @@ local function getOptions()
 					hideChat = {
 						order = 6,
 						type = "select",
-						name = "Hide Chat Frame",
+						name = L["Hide Chat Frame"],
 						values = E:GetModule("EmbedSystem"):GetChatWindowInfo(),
 						disabled = function() return E.db.addOnSkins.embed.embedType == "DISABLE" end
 					},
 					rightChatPanel = {
 						order = 7,
 						type = "toggle",
-						name = "Embed into Right Chat Panel"
+						name = L["Embed into Right Chat Panel"]
 					},
 					belowTopTab = {
 						order = 8,
 						type = "toggle",
-						name = "Embed Below Top Tab"
+						name = L["Embed Below Top Tab"]
 					}
 				}
 			}
