@@ -39,43 +39,49 @@ S:AddCallbackForAddon("RaidBrowserRU", "RaidBrowserRU", function()
 	LFRBrowseFrameListScrollFrameScrollBar:HookScript("OnShow", function()
 		S:HandleScrollBar(LFRBrowseFrameListScrollFrameScrollBar)
 	end)
+	-- local onupdatecheck = false
 
-	LFRQueueFrame:HookScript("OnUpdate",function()
-		for i = 1,6 do
-			local chbx = _G["RBCheckButton"..i]
-			if chbx then
-				S:HandleCheckBox(chbx)
+	LFRParentFrame:HookScript("OnShow",function()
+		-- if not onupdatecheck then
+			for i = 1,6 do
+				local chbx = _G["RBCheckButton"..i]
+				if chbx then
+					S:HandleCheckBox(chbx)
+				end
 			end
-		end
-		local editboxes = {
-			"RBTankEditBox",
-			"RBDDEditBox",
-			"RBHealEditBox",
-			"RBAnrolText",
-			"RBDInfoText"
-		}
-		for _,eb in ipairs(editboxes) do
-			local edbox =  _G[eb]
-			if edbox then
-				S:HandleEditBox(edbox)
+			local editboxes = {
+				"RBTankEditBox",
+				"RBDDEditBox",
+				"RBHealEditBox",
+				"RBAnrolText",
+				"RBDInfoText"
+			}
+			for _,eb in ipairs(editboxes) do
+				local edbox =  _G[eb]
+				if edbox then
+					S:HandleEditBox(edbox)
+				end
 			end
-		end
-		local sliders = {
-			"RBTankSlider",
-			"RBDDSlider",
-			"RBHealSlider",
-			"RBILVLSlider",
-			"RBSpamTimerSlider"
-		}
-		for _,slider in ipairs(sliders) do
-			local sl =  _G[slider]
-			if sl then
-				S:HandleSliderFrame(sl)
+			local sliders = {
+				"RBTankSlider",
+				"RBDDSlider",
+				"RBHealSlider",
+				"RBILVLSlider",
+				"RBSpamTimerSlider"
+			}
+			for _,slider in ipairs(sliders) do
+				local sl =  _G[slider]
+				if sl then
+					S:HandleSliderFrame(sl)
+				end
 			end
-		end
-		S:HandleButton(RBStartSpamButton)
-		S:HandleButton(RBClearAllButton)
-		S:HandleDropDownBox(RBNumRaidsDropDown)
+			if RBStartSpamButton then
+			S:HandleButton(_G["RBStartSpamButton"])
+			S:HandleButton(_G["RBClearAllButton"])
+			S:HandleDropDownBox(_G["RBNumRaidsDropDown"])
+			end
+			-- onupdatecheck = true
+		-- end
 	end)
 
 
