@@ -423,8 +423,10 @@ S:AddCallbackForAddon("DBM-GUI", "DBM-GUI", function()
 		DBM_GUI_OptionsFrameBossModsListScrollBar:Point("BOTTOMLEFT", 7, 18)
 
 		for _, button in ipairs(DBM_GUI_OptionsFrameBossMods.buttons) do
-			S:HandleCollapseExpandButton(button.toggle, "auto")
-			button.toggle:Point("TOPLEFT", 3, 0)
+			if(S and S.HandleCollapseExpandButton) then
+				S:HandleCollapseExpandButton(button.toggle, "auto")
+				button.toggle:Point("TOPLEFT", 3, 0)
+			end
 		end
 
 		DBM_GUI_OptionsFrameDBMOptions:StripTextures()
@@ -436,8 +438,10 @@ S:AddCallbackForAddon("DBM-GUI", "DBM-GUI", function()
 		DBM_GUI_OptionsFrameDBMOptionsListScrollBar:Point("BOTTOMLEFT", 7, 18)
 
 		for _, button in ipairs(DBM_GUI_OptionsFrameDBMOptions.buttons) do
-			S:HandleCollapseExpandButton(button.toggle, "auto")
-			button.toggle:Point("TOPLEFT", 3, 0)
+			if(S and S.HandleCollapseExpandButton) then
+				S:HandleCollapseExpandButton(button.toggle, "auto")
+				button.toggle:Point("TOPLEFT", 3, 0)
+			end
 		end
 
 		S:Unhook(self, "OnShow")

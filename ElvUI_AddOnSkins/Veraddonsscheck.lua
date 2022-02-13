@@ -29,7 +29,7 @@ do
         end
         SendMessageWaitingAS = nil
     end
-    
+
     local function SendRecieve_AS(_, event, prefix, message, _, sender)
         if event == "CHAT_MSG_ADDON" then
             -- print(argtime)
@@ -40,15 +40,15 @@ do
             message = tonumber(message)
 
             local  timenow = time()
-            if message and (message > ver) then 
-                if timenow - spamt >= timeneedtospam then              
+            if message and (message > ver) then
+                if timenow - spamt >= timeneedtospam then
                     print("|cff1784d1".."ElvUI_AddOnSkins".."|r".." (".."|cffff0000"..ver.."|r"..") устарел. Вы можете загрузить последнюю версию (".."|cff00ff00"..message.."|r"..") из ".."|cffffcc00".."https://github.com/fxpw/ElvUI_AddOnSkins".."|r")
                     -- spamt = time()
                     spamt = time()
                 end
             end
         end
-   
+
 
         if event == "PARTY_MEMBERS_CHANGED" or event == "RAID_ROSTER_UPDATE" then
             local numRaid = GetNumRaidMembers()
@@ -62,15 +62,14 @@ do
                 end
                 SendRecieveGroupSizeAS = num
             end
-        elseif event == "PLAYER_ENTERING_WORLD" then          
-                    if not SendMessageWaitingAS then
-                        SendMessage_AS()                       
-                        -- SendMessageWaitingBB = E:Delay(10, SendMessage_BB)
-                    end
-                
+        elseif event == "PLAYER_ENTERING_WORLD" then
+            if not SendMessageWaitingAS then
+                SendMessage_AS()
+                -- SendMessageWaitingBB = E:Delay(10, SendMessage_BB)
             end
+        end
     end
-           
+
     local f = CreateFrame("Frame")
     f:RegisterEvent("CHAT_MSG_ADDON")
     f:RegisterEvent("RAID_ROSTER_UPDATE")

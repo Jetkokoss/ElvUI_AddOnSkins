@@ -85,55 +85,56 @@ S:AddCallbackForAddon("Atlas", "Atlas", function()
 	S:HandleButton(AtlasOptionsFrameResetPosition)
 
 
+	if AtlasLootPanel then
+		AtlasLootPanel:HookScript("OnShow", function()
+			_G["AtlasLootDefaultFrameSearchButtonFilterAtlas"]:StripTextures()
+			-- S:HandleButton(_G["AtlasLootDefaultFrameSearchButtonFilterAtlas"])
+			_G["AtlasLootDefaultFrameSearchButtonFilterAtlas"]:ClearAllPoints()
+			_G["AtlasLootDefaultFrameSearchButtonFilterAtlas"]:SetPoint("LEFT", AtlasLootSearchButton, "RIGHT", -90, 0)
+			local normtex = _G["AtlasLootDefaultFrameSearchButtonFilterAtlas"]:SetNormalTexture("Interface\\Buttons\\on")
+			local pushtex =_G["AtlasLootDefaultFrameSearchButtonFilterAtlas"]:SetPushedTexture("Interface\\Buttons\\click")
+			-- _G["AtlasLootDefaultFrameSearchButtonFilterAtlas"]:Width(25)
+			-- _G["AtlasLootDefaultFrameSearchButtonFilterAtlas"]:SetText("ф")
+				_G["AtlasLootDefaultFrameSearchButtonFilterAtlas"]:HookScript("OnClick",function()
+					_G["AtlasLootDefaultFrameFilterAtlas"]:StripTextures()
+					_G["AtlasLootDefaultFrameFilterAtlas"]:CreateBackdrop("Transparent")
 
-	AtlasLootPanel:HookScript("OnShow", function()
-		_G["AtlasLootDefaultFrameSearchButtonFilterAtlas"]:StripTextures()
-		-- S:HandleButton(_G["AtlasLootDefaultFrameSearchButtonFilterAtlas"])
-		_G["AtlasLootDefaultFrameSearchButtonFilterAtlas"]:ClearAllPoints()
-		_G["AtlasLootDefaultFrameSearchButtonFilterAtlas"]:SetPoint("LEFT", AtlasLootSearchButton, "RIGHT", -90, 0)
-		local normtex = _G["AtlasLootDefaultFrameSearchButtonFilterAtlas"]:SetNormalTexture("Interface\\Buttons\\on")
-		local pushtex =_G["AtlasLootDefaultFrameSearchButtonFilterAtlas"]:SetPushedTexture("Interface\\Buttons\\click")
-		-- _G["AtlasLootDefaultFrameSearchButtonFilterAtlas"]:Width(25)
-		-- _G["AtlasLootDefaultFrameSearchButtonFilterAtlas"]:SetText("ф")
-			_G["AtlasLootDefaultFrameSearchButtonFilterAtlas"]:HookScript("OnClick",function()
-				_G["AtlasLootDefaultFrameFilterAtlas"]:StripTextures()
-				_G["AtlasLootDefaultFrameFilterAtlas"]:CreateBackdrop("Transparent")
-
-				local checkboxes = {
-					"AtlasLootCheckButtonFilterEnableAtlas",
-					"AtlasLootCheckButtonClothAtlas",
-					"AtlasLootCheckButtonLeatherAtlas",
-					"AtlasLootCheckButtonMailAtlas",
-					"AtlasLootCheckButtonPlateAtlas",
-					"AtlasLootCheckButtonWeaponAtlas",
-					"AtlasLootCheckButton2WeaponAtlas",
-					"AtlasLootCheckButtonMainHandAtlas",
-					"AtlasLootCheckButtonOffHandAtlas",
-					-- "AtlasLootCheckButtonFilterEnable",
-					-- "AtlasLootCheckButtonFilterEnable",
-					-- "AtlasLootCheckButtonFilterEnable",
-					-- "AtlasLootCheckButtonFilterEnable",
-				}
-				for _,checkbox in ipairs(checkboxes) do
-					checkbox = _G[checkbox]
-					if checkbox then
-						S:HandleCheckBox(checkbox)					
-					end
-				end
-
-				local editboxes = {
-					"AtlasLootDefaultFrameFilterBoxIlvlFromAtlas",
-					"AtlasLootDefaultFrameFilterBoxIlvlBeforeAtlas",
-					"AtlasLootDefaultFrameFilterBoxlvlFromAtlas",
-					"AtlasLootDefaultFrameFilterBoxlvlBeforeAtlas",
+					local checkboxes = {
+						"AtlasLootCheckButtonFilterEnableAtlas",
+						"AtlasLootCheckButtonClothAtlas",
+						"AtlasLootCheckButtonLeatherAtlas",
+						"AtlasLootCheckButtonMailAtlas",
+						"AtlasLootCheckButtonPlateAtlas",
+						"AtlasLootCheckButtonWeaponAtlas",
+						"AtlasLootCheckButton2WeaponAtlas",
+						"AtlasLootCheckButtonMainHandAtlas",
+						"AtlasLootCheckButtonOffHandAtlas",
+						-- "AtlasLootCheckButtonFilterEnable",
+						-- "AtlasLootCheckButtonFilterEnable",
+						-- "AtlasLootCheckButtonFilterEnable",
+						-- "AtlasLootCheckButtonFilterEnable",
 					}
-					for _,editbox in ipairs(editboxes) do
-						editbox = _G[editbox]
-						if editbox then
-							S:HandleEditBox(editbox)
+					for _,checkbox in ipairs(checkboxes) do
+						checkbox = _G[checkbox]
+						if checkbox then
+							S:HandleCheckBox(checkbox)					
 						end
 					end
-		end)
 
-	end)
+					local editboxes = {
+						"AtlasLootDefaultFrameFilterBoxIlvlFromAtlas",
+						"AtlasLootDefaultFrameFilterBoxIlvlBeforeAtlas",
+						"AtlasLootDefaultFrameFilterBoxlvlFromAtlas",
+						"AtlasLootDefaultFrameFilterBoxlvlBeforeAtlas",
+						}
+						for _,editbox in ipairs(editboxes) do
+							editbox = _G[editbox]
+							if editbox then
+								S:HandleEditBox(editbox)
+							end
+						end
+			end)
+
+		end)
+	end
 end)
