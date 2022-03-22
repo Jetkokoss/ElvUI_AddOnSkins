@@ -41,8 +41,8 @@ local function handlebuttonsselltab()
 					button.Text:SetDrawLayer("BORDER")
 					button.Text:SetText(button.itemInfo.count)
 		end
-		if AuctionatorSellingFrameBagListingScrollFrameItemListingFrameWeaponItems ~= nil  then
-			for _, button in ipairs(AuctionatorSellingFrameBagListingScrollFrameItemListingFrameWeaponItems.buttons) do				
+		if AuctionatorSellingFrame.BagListing.ScrollFrame.ItemListingFrameWeaponItems ~= nil  then
+			for _, button in ipairs(AuctionatorSellingFrameBagListingScrollFrameItemListingFrameWeaponItems.buttons) do
 				if button then
 					handleaucbicon(button)
 				end
@@ -64,9 +64,9 @@ local function handlebuttonsselltab()
 		end
 		if AuctionatorSellingFrameBagListingScrollFrameItemListingFrameGemItems ~= nil then
 			for _, button in ipairs(AuctionatorSellingFrameBagListingScrollFrameItemListingFrameGemItems.buttons) do
-					if button then
+				if button then
 					handleaucbicon(button)
-					end
+				end
 			end
 		end
 		if AuctionatorSellingFrameBagListingScrollFrameItemListingFrameConsumableItems ~= nil then
@@ -698,13 +698,12 @@ S:AddCallbackForAddon("Auctionator", "Auctionator", function()
 	if not E.private.addOnSkins.Auctionator then return end
 	TradeSkillFrame:HookScript("OnUpdate", function()
 		if AuctionatorTradeSkillSearch then
-		S:HandleButton(AuctionatorTradeSkillSearch)
+			S:HandleButton(AuctionatorTradeSkillSearch)
 		end
 	end)
-	
+
 	AuctionHouseFrame:HookScript("OnUpdate", function()
 
-		
 		S:HandleTab(AuctionatorTabs_ShoppingLists)
 		S:HandleTab(AuctionatorTabs_Selling)
 		S:HandleTab(AuctionatorTabs_Cancelling)

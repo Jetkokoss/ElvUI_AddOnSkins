@@ -26,15 +26,18 @@ S:AddCallbackForAddon("FishingBuddy", "FishingBuddy", function()
 	FishingLocsScrollFrame:StripTextures()
 	S:HandleScrollBar(FishingLocsScrollFrameScrollBar)
 
-	S:HandleTab(FishingBuddyFrameTab1)
-	S:HandleTab(FishingBuddyFrameTab2)
-
-	FishingBuddyFrameTab1:Point("CENTER", FishingBuddyFrame, "BOTTOMLEFT", 54, 62)
-	FishingBuddyFrameTab1.ClearAllPoints = E.noop
-	FishingBuddyFrameTab1.SetPoint = E.noop
-	FishingBuddyFrameTab2:Point("LEFT", FishingBuddyFrameTab1, "RIGHT", -15, 0)
-	FishingBuddyFrameTab2.ClearAllPoints = E.noop
-	FishingBuddyFrameTab2.SetPoint = E.noop
+	if FishingBuddyFrameTab1 then
+		S:HandleTab(FishingBuddyFrameTab1)
+		FishingBuddyFrameTab1:Point("CENTER", FishingBuddyFrame, "BOTTOMLEFT", 54, 62)
+		FishingBuddyFrameTab1.ClearAllPoints = E.noop
+		FishingBuddyFrameTab1.SetPoint = E.noop
+	end
+	if FishingBuddyFrameTab2 then
+		S:HandleTab(FishingBuddyFrameTab2)
+		FishingBuddyFrameTab2:Point("LEFT", FishingBuddyFrameTab1, "RIGHT", -15, 0)
+		FishingBuddyFrameTab2.ClearAllPoints = E.noop
+		FishingBuddyFrameTab2.SetPoint = E.noop
+	end
 
 	S:HandleButton(FishingLocationsSwitchButton)
 

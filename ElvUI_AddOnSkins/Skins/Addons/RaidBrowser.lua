@@ -5,18 +5,21 @@ local AS = E:GetModule("AddOnSkins")
 -- Raid Browser RU
 -- https://github.com/fxpw/RaidBrowser-ru-for-sirus
 
-if not AS:IsAddonLODorEnabled("RaidBrowserRU") then return end
+if not AS:IsAddonLODorEnabled("RaidBrowser") then return end
 
 
 
 
-S:AddCallbackForAddon("RaidBrowserRU", "RaidBrowserRU", function()
+S:AddCallbackForAddon("RaidBrowser", "RaidBrowser", function()
 
 	if not E.private.addOnSkins.RaidBrowserRU then return end
-
-
+	S:HandleTab(LFRParentFrameTab3)
+	S:HandleScrollBar(LFRHistoryFrameScrollFrameScrollBar)
+	LFRHistoryFrameScrollFrameScrollBarBorder:StripTextures()
 	BARaidBrowserEditSpec:SetTemplate("Transparent")
-
+	for i = 1,5 do 
+		S:HandleCheckBox(_G["LFRHistoryFrameCheckButton"..i])
+	end
 	BARaidBrowserEditName:SetTemplate("Transparent")
 	BARaidBrowserEditGearScore:SetTemplate("Transparent")
 	BARaidBrowserEditName:Height(30)
