@@ -7,15 +7,15 @@ if not AS:IsAddonLODorEnabled("TellMeWhen") then return end
 local _G = _G
 local unpack = unpack
 
--- TellMeWhen 1.2.5b1
--- https://www.curseforge.com/wow/addons/tellmewhen/files/448968
+-- TellMeWhen 1.2.6
+-- https://github.com/fxpw/TMW_Sirus
 
 S:AddCallbackForAddon("TellMeWhen", "TellMeWhen", function()
 	if not E.private.addOnSkins.TellMeWhen then return end
 
 	TELLMEWHEN_ICONSPACING = E.Border
 
-	if TELLMEWHEN_VERSION == "1.2.5" then
+	if TELLMEWHEN_VERSION == "1.2.6" then
 		hooksecurefunc("TellMeWhen_Group_Update", function(groupID)
 			local group = TellMeWhen_Settings.Groups[groupID] or TellMeWhen_Group_Defaults
 			if not group.Enabled then return end
@@ -56,6 +56,30 @@ S:AddCallbackForAddon("TellMeWhen", "TellMeWhen", function()
 				end
 			end
 		end)
+
+
+		local dropdownArrowColor = {1, 0.8, 0}
+		--options
+		for i = 1,8 do
+			S:HandleButton(_G["InterfaceOptionsTellMeWhenPanelGroup"..i.."GroupResetButton"])
+
+			S:HandleNextPrevButton(_G["InterfaceOptionsTellMeWhenPanelGroup"..i.."ColumnsWidgetRightButton"], "right", dropdownArrowColor)
+			_G["InterfaceOptionsTellMeWhenPanelGroup"..i.."ColumnsWidgetRightButton"]:Size(20)
+			S:HandleNextPrevButton(_G["InterfaceOptionsTellMeWhenPanelGroup"..i.."ColumnsWidgetLeftButton"], "left", dropdownArrowColor)
+			_G["InterfaceOptionsTellMeWhenPanelGroup"..i.."ColumnsWidgetLeftButton"]:Size(20)
+
+			S:HandleNextPrevButton(_G["InterfaceOptionsTellMeWhenPanelGroup"..i.."RowsWidgetRightButton"], "right", dropdownArrowColor)
+			_G["InterfaceOptionsTellMeWhenPanelGroup"..i.."RowsWidgetRightButton"]:Size(20)
+			S:HandleNextPrevButton(_G["InterfaceOptionsTellMeWhenPanelGroup"..i.."RowsWidgetLeftButton"], "left", dropdownArrowColor)
+			_G["InterfaceOptionsTellMeWhenPanelGroup"..i.."RowsWidgetLeftButton"]:Size(20)
+
+			-- S:HandleCheckBox(_G["InterfaceOptionsTellMeWhenPanelGroup"..i.."EnableButton"])
+			S:HandleCheckBox(_G["InterfaceOptionsTellMeWhenPanelGroup"..i.."OnlyInCombatButton"])
+			S:HandleCheckBox(_G["InterfaceOptionsTellMeWhenPanelGroup"..i.."Spec1Button"])
+			S:HandleCheckBox(_G["InterfaceOptionsTellMeWhenPanelGroup"..i.."Spec2Button"])
+			S:HandleCheckBox(_G["InterfaceOptionsTellMeWhenPanelGroup"..i.."Spec3Button"])
+		end
+		S:HandleButton(InterfaceOptionsTellMeWhenPanelLockUnlockButton)
 	else
 		hooksecurefunc("TellMeWhen_Group_Update", function(groupID)
 			local group = _G["TellMeWhen_Group" .. groupID]
@@ -87,26 +111,5 @@ S:AddCallbackForAddon("TellMeWhen", "TellMeWhen", function()
 		end)
 	end
 
-	local dropdownArrowColor = {1, 0.8, 0}
-	--options
-	for i = 1,8 do
-		S:HandleButton(_G["InterfaceOptionsTellMeWhenPanelGroup"..i.."GroupResetButton"])
-
-		S:HandleNextPrevButton(_G["InterfaceOptionsTellMeWhenPanelGroup"..i.."ColumnsWidgetRightButton"], "right", dropdownArrowColor)
-		_G["InterfaceOptionsTellMeWhenPanelGroup"..i.."ColumnsWidgetRightButton"]:Size(20)
-		S:HandleNextPrevButton(_G["InterfaceOptionsTellMeWhenPanelGroup"..i.."ColumnsWidgetLeftButton"], "left", dropdownArrowColor)
-		_G["InterfaceOptionsTellMeWhenPanelGroup"..i.."ColumnsWidgetLeftButton"]:Size(20)
-
-		S:HandleNextPrevButton(_G["InterfaceOptionsTellMeWhenPanelGroup"..i.."RowsWidgetRightButton"], "right", dropdownArrowColor)
-		_G["InterfaceOptionsTellMeWhenPanelGroup"..i.."RowsWidgetRightButton"]:Size(20)
-		S:HandleNextPrevButton(_G["InterfaceOptionsTellMeWhenPanelGroup"..i.."RowsWidgetLeftButton"], "left", dropdownArrowColor)
-		_G["InterfaceOptionsTellMeWhenPanelGroup"..i.."RowsWidgetLeftButton"]:Size(20)
-
-		-- S:HandleCheckBox(_G["InterfaceOptionsTellMeWhenPanelGroup"..i.."EnableButton"])
-		S:HandleCheckBox(_G["InterfaceOptionsTellMeWhenPanelGroup"..i.."OnlyInCombatButton"])
-		S:HandleCheckBox(_G["InterfaceOptionsTellMeWhenPanelGroup"..i.."Spec1Button"])
-		S:HandleCheckBox(_G["InterfaceOptionsTellMeWhenPanelGroup"..i.."Spec2Button"])
-		S:HandleCheckBox(_G["InterfaceOptionsTellMeWhenPanelGroup"..i.."Spec3Button"])
-	end
-	S:HandleButton(InterfaceOptionsTellMeWhenPanelLockUnlockButton)
+	
 end)
