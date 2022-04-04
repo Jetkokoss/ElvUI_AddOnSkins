@@ -5,7 +5,7 @@ local AS = E:GetModule("AddOnSkins")
 if not AS:IsAddonLODorEnabled("WIM") then return end
 
 local format = string.format
-update1sliderframehook = 1
+-- update1sliderframehook = 1
 local dropdownArrowColor = {1, 0.8, 0}
 -- WIM 3.3.7
 -- https://www.wowace.com/projects/wim-3/files/439176
@@ -574,7 +574,7 @@ S:AddCallbackForAddon("WIM", "WIM", function()
 	}
 
 	local function ApplySkin(self)
-		self.db.skin.selected = "WIM ElvUI"
+		self.db.skin.selected = self.db.skin.selected or "WIM ElvUI"
 		self.RegisterSkin(WIM_Elvui)
 		self.RegisterSkin(WIM_ElVui_noguild)
 	end
@@ -634,19 +634,11 @@ S:AddCallbackForAddon("WIM", "WIM", function()
 			else break
 			end
 		end
-		
+
 
 	end -- end hook
 
 	winopthook:HookScript("OnUpdate",wimhookskinopt)
-
-
-
-	-- local function wimhookskinoptslider()
-		
-	-- end
-	
-	-- winopthook:HookScript("OnUpdate",wimhookskinoptslider)
 
 
 end)
