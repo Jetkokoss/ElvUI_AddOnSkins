@@ -15,7 +15,7 @@ S:AddCallbackForAddon("TellMeWhen", "TellMeWhen", function()
 
 	TELLMEWHEN_ICONSPACING = E.Border
 
-	if TELLMEWHEN_VERSION == "1.2.6" then
+	if TELLMEWHEN_VERSION == "1.2.6" or TELLMEWHEN_VERSION == "1.2.5" then
 		hooksecurefunc("TellMeWhen_Group_Update", function(groupID)
 			local group = TellMeWhen_Settings.Groups[groupID] or TellMeWhen_Group_Defaults
 			if not group.Enabled then return end
