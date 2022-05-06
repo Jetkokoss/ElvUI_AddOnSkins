@@ -15,7 +15,7 @@ S:AddCallbackForAddon("TellMeWhen", "TellMeWhen", function()
 
 	TELLMEWHEN_ICONSPACING = E.Border
 
-	if TELLMEWHEN_VERSION == "1.2.6" or TELLMEWHEN_VERSION == "1.2.5" then
+	if TELLMEWHEN_VERSION == "1.2.7" then
 		hooksecurefunc("TellMeWhen_Group_Update", function(groupID)
 			local group = TellMeWhen_Settings.Groups[groupID] or TellMeWhen_Group_Defaults
 			if not group.Enabled then return end
@@ -80,35 +80,35 @@ S:AddCallbackForAddon("TellMeWhen", "TellMeWhen", function()
 			S:HandleCheckBox(_G["InterfaceOptionsTellMeWhenPanelGroup"..i.."Spec3Button"])
 		end
 		S:HandleButton(InterfaceOptionsTellMeWhenPanelLockUnlockButton)
-	else
-		hooksecurefunc("TellMeWhen_Group_Update", function(groupID)
-			local group = _G["TellMeWhen_Group" .. groupID]
-			if not group.Enabled then return end
+	-- else
+	-- 	hooksecurefunc("TellMeWhen_Group_Update", function(groupID)
+	-- 		local group = _G["TellMeWhen_Group" .. groupID]
+	-- 		if not group.Enabled then return end
 
-			for row = 1, group.Rows do
-				for column = 1, group.Columns do
-					local iconID = (row - 1) * group.Columns + column
-					local iconName = group.groupName .. "_Icon" .. iconID
-					local icon = _G[iconName]
+	-- 		for row = 1, group.Rows do
+	-- 			for column = 1, group.Columns do
+	-- 				local iconID = (row - 1) * group.Columns + column
+	-- 				local iconName = group.groupName .. "_Icon" .. iconID
+	-- 				local icon = _G[iconName]
 
-					if icon and not icon.isSkinned then
-						_G[iconName]:StyleButton()
-						icon:SetTemplate("Default")
+	-- 				if icon and not icon.isSkinned then
+	-- 					_G[iconName]:StyleButton()
+	-- 					icon:SetTemplate("Default")
 
-						icon:GetRegions():SetTexture(nil)
+	-- 					icon:GetRegions():SetTexture(nil)
 
-						_G[iconName .. "Icon"]:SetTexCoord(unpack(E.TexCoords))
-						_G[iconName .. "Icon"]:SetInside()
+	-- 					_G[iconName .. "Icon"]:SetTexCoord(unpack(E.TexCoords))
+	-- 					_G[iconName .. "Icon"]:SetInside()
 
-						_G[iconName .. "Count"]:FontTemplate()
+	-- 					_G[iconName .. "Count"]:FontTemplate()
 
-						E:RegisterCooldown(_G[iconName .. "Cooldown"])
+	-- 					E:RegisterCooldown(_G[iconName .. "Cooldown"])
 
-						icon.isSkinned = true
-					end
-				end
-			end
-		end)
+	-- 					icon.isSkinned = true
+	-- 				end
+	-- 			end
+	-- 		end
+	-- 	end)
 	end
 
 	
