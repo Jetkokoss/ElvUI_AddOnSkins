@@ -17,10 +17,10 @@ local hooksecurefunc = hooksecurefunc
 S:AddCallbackForAddon("DBM-Core", "DBM-Core", function()
 	if not E.private.addOnSkins.DBM then return end
 
-	-- if GetAddOnMetadata("DBM-Core","Version") == "9.2" then return end
+	-- if GetAddOnMetadata("DBM-Core","Version") == "9.2.20_alpha" then return end
 	local backportVersion = DBM.ReleaseRevision > 7000
 	-- if true then return end
-	local backportVersion2 = DBM.ReleaseRevision >= 20220412000000 -- 9.2.14
+	local backportVersion2 = GetAddOnMetadata("DBM-Core","Version") == "9.2.20_alpha" -- 9.2.14
 	local function createIconOverlay(id, parent)
 		local frame = CreateFrame("Frame", "$parentIcon" .. id .. "Overlay", parent)
 		frame:SetTemplate()
@@ -484,8 +484,8 @@ end)
 
 S:AddCallbackForAddon("DBM-GUI", "DBM-GUI", function()
 	if not E.private.addOnSkins.DBM then return end
-	local backportVersion2 = DBM.ReleaseRevision >= 20220412000000
-	-- if GetAddOnMetadata("DBM-GUI","Version") == "c617782" then return end
+	local backportVersion2 = GetAddOnMetadata("DBM-GUI","Version") == "1.01"
+	-- if GetAddOnMetadata("DBM-GUI","Version") == "1.01" then return end
 	-- if true then return end
 	DBM_GUI_OptionsFrame:SetTemplate("Transparent")
 
@@ -545,8 +545,10 @@ S:AddCallbackForAddon("DBM-GUI", "DBM-GUI", function()
 			DBM_GUI_OptionsFrameBossModsListScrollBar:Point("BOTTOMLEFT", 7, 18)
 
 			for _, button in ipairs(DBM_GUI_OptionsFrameBossMods.buttons) do
-				S:HandleCollapseExpandButton(button.toggle, "auto")
-				button.toggle:Point("TOPLEFT", 3, 0)
+				if(S and S.HandleCollapseExpandButton) then
+					S:HandleCollapseExpandButton(button.toggle, "auto")
+					button.toggle:Point("TOPLEFT", 3, 0)
+				end
 			end
 
 			DBM_GUI_OptionsFrameDBMOptions:StripTextures()
@@ -558,8 +560,10 @@ S:AddCallbackForAddon("DBM-GUI", "DBM-GUI", function()
 			DBM_GUI_OptionsFrameDBMOptionsListScrollBar:Point("BOTTOMLEFT", 7, 18)
 
 			for _, button in ipairs(DBM_GUI_OptionsFrameDBMOptions.buttons) do
-				S:HandleCollapseExpandButton(button.toggle, "auto")
-				button.toggle:Point("TOPLEFT", 3, 0)
+				if(S and S.HandleCollapseExpandButton) then
+					S:HandleCollapseExpandButton(button.toggle, "auto")
+					button.toggle:Point("TOPLEFT", 3, 0)
+				end
 			end
 		end
 
