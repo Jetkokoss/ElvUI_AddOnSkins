@@ -20,7 +20,6 @@ P.addOnSkins = {
 	dbmFont = "PT Sans Narrow",
 	dbmFontSize = 12,
 	dbmFontOutline = "OUTLINE",
-	dbmIconSize = 1,
 	dbmTemplate = "Default",
 	DBMSkinHalf = false,
 

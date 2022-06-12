@@ -17,10 +17,8 @@ local hooksecurefunc = hooksecurefunc
 S:AddCallbackForAddon("DBM-Core", "DBM-Core", function()
 	if not E.private.addOnSkins.DBM then return end
 
-	-- if GetAddOnMetadata("DBM-Core","Version") == "9.2.20_alpha" then return end
 	local backportVersion = DBM.ReleaseRevision > 7000
-	-- if true then return end
-	local backportVersion2 = GetAddOnMetadata("DBM-Core","Version") == "9.2.20_alpha" -- 9.2.14
+
 	local function createIconOverlay(id, parent)
 		local frame = CreateFrame("Frame", "$parentIcon" .. id .. "Overlay", parent)
 		frame:SetTemplate()
@@ -59,7 +57,7 @@ S:AddCallbackForAddon("DBM-Core", "DBM-Core", function()
 		local spark = _G[frameName .. "BarSpark"]
 
 		local scale = self.enlarged and self.owner.options.HugeScale or self.owner.options.Scale
-		local barWidth = (backportVersion2 and (self.enlarged and self.owner.options.HugeHeight or self.owner.options.Height) or db.dbmBarHeight) * scale
+		local barWidth = (self.enlarged and self.owner.options.HugeWidth or self.owner.options.Width) * scale
 		local barHeight = db.dbmBarHeight * scale
 		local fontSize = db.dbmFontSize * scale
 
@@ -122,15 +120,9 @@ S:AddCallbackForAddon("DBM-Core", "DBM-Core", function()
 			end
 			timer:Point("RIGHT", -5, 0)
 		end
-		if not backportVersion then
-			name:SetFont(self._font, fontSize, db.dbmFontOutline)
-			timer:SetFont(self._font, fontSize, db.dbmFontOutline)
-		end
 
-		if not backportVersion then
-			name:SetFont(self._font, fontSize, db.dbmFontOutline)
-			timer:SetFont(self._font, fontSize, db.dbmFontOutline)
-		end
+		name:SetFont(self._font, fontSize, db.dbmFontOutline)
+		timer:SetFont(self._font, fontSize, db.dbmFontOutline)
 
 		if self.owner.options.IconLeft then
 			icon1.overlay:Show()
@@ -145,80 +137,6 @@ S:AddCallbackForAddon("DBM-Core", "DBM-Core", function()
 		end
 	end
 
-	local function skinBars(self)
-		local db = E.db.addOnSkins
-
-		for bar in self:GetBarIterator() do
-			if not bar.injected then
-				hooksecurefunc(bar, "Update", function()
-					local sparkEnabled = DBT.Options.Spark
-					if not (db.DBMSkinHalf and sparkEnabled) then return end
-					local spark = _G[bar.frame:GetName().."BarSpark"]
-					spark:SetSize(12, ((bar.enlarged and DBT.Options.HugeHeight or DBT.Options.Height) * 3) - 2)
-					local a, b, c, d = spark:GetPoint()
-					spark:SetPoint(a, b, c, d, 0)
-				end)
-				hooksecurefunc(bar, "ApplyStyle", function()
-					local frame = bar.frame
-					local tbar = _G[frame:GetName().."Bar"]
-					local icon1 = _G[frame:GetName().."BarIcon1"]
-					local icon2 = _G[frame:GetName().."BarIcon2"]
-					local name = _G[frame:GetName().."BarName"]
-					local timer = _G[frame:GetName().."BarTimer"]
-					local iconSize = (bar.enlarged and DBT.Options.HugeHeight or DBT.Options.Height) * db.dbmIconSize
-					if db.DBMSkinHalf then
-						iconSize = iconSize * 2
-					end
-
-					if not icon1.overlay then
-						icon1.overlay = createIconOverlay(1, frame)
-						icon1:SetTexCoord(unpack(E.TexCoords))
-						icon1:SetParent(icon1.overlay)
-						icon1:SetInside(icon1.overlay)
-					end
-					icon1.overlay:SetSize(iconSize, iconSize)
-
-					if not icon2.overlay then
-						icon2.overlay = createIconOverlay(2, frame)
-						icon2:SetTexCoord(unpack(E.TexCoords))
-						icon2:SetParent(icon2.overlay)
-						icon2:SetInside(icon2.overlay)
-					end
-					icon2.overlay:SetSize(iconSize, iconSize)
-
-					frame:SetTemplate(db.dbmTemplate)
-
-					tbar:SetInside(frame)
-
-					name:ClearAllPoints()
-					name:SetWidth(165)
-					name:SetHeight(8)
-					name:SetJustifyH("LEFT")
-					name:SetShadowColor(0, 0, 0, 0)
-
-					timer:ClearAllPoints()
-					timer:SetJustifyH("RIGHT")
-					timer:SetShadowColor(0, 0, 0, 0)
-
-					if db.DBMSkinHalf then
-						name:SetPoint("BOTTOMLEFT", frame, "TOPLEFT", 0, 3)
-						name:SetPoint("BOTTOMRIGHT", timer, "BOTTOMLEFT") -- truncation
-						timer:SetPoint("BOTTOMRIGHT", frame, "TOPRIGHT", -1, 1)
-					else
-						name:SetPoint("LEFT", frame, "LEFT", 4, 0)
-						name:SetPoint("RIGHT", timer, "LEFT") -- truncation
-						timer:SetPoint("RIGHT", frame, "RIGHT", -4, 0)
-					end
-
-					if DBT.Options.IconLeft then icon1.overlay:Show() else icon1.overlay:Hide() end
-					if DBT.Options.IconRight then icon2.overlay:Show() else icon2.overlay:Hide() end
-
-					bar.injected = true
-				end)
-				bar:ApplyStyle()
-			end
-		end
-	end
 	local function correctPoint(self, p1, a, p2, x, y)
 		self._SetPoint(self, p1, a, p2, x, y - 40)
 		self.SetPoint = nil
@@ -352,35 +270,31 @@ S:AddCallbackForAddon("DBM-Core", "DBM-Core", function()
 		end
 	end
 
-	if backportVersion2 then
-		hooksecurefunc(DBT, "CreateBar", skinBars)
-	else
-		S:SecureHook(DBT, "CreateBar", function(self)
-			local hooked
-			for bar in pairs(self.bars) do
-				if not hooked then
-					local mt = getmetatable(bar).__index
+	S:SecureHook(DBT, "CreateBar", function(self)
+		local hooked
+		for bar in pairs(self.bars) do
+			if not hooked then
+				local mt = getmetatable(bar).__index
 
-					hooksecurefunc(mt, "ApplyStyle", applyStyle)
-					if not backportVersion then
-						S:Hook(mt, "Update", preUpdate)
-					end
-
-					mt.SetPosition = setPosition
-					mt.MoveToNextPosition = moveToNextPosition
-					mt.Enlarge = enlarge
-					mt.AnimateEnlarge = animateEnlarge
-
-					hooked = true
+				hooksecurefunc(mt, "ApplyStyle", applyStyle)
+				if not backportVersion then
+					S:Hook(mt, "Update", preUpdate)
 				end
 
-				bar:ApplyStyle()
-				bar:SetPosition()
+				mt.SetPosition = setPosition
+				mt.MoveToNextPosition = moveToNextPosition
+				mt.Enlarge = enlarge
+				mt.AnimateEnlarge = animateEnlarge
+
+				hooked = true
 			end
 
-			S:Unhook(DBT, "CreateBar")
-		end)
-	end
+			bar:ApplyStyle()
+			bar:SetPosition()
+		end
+
+		S:Unhook(DBT, "CreateBar")
+	end)
 
 	local function SkinBoss()
 		local db = E.db.addOnSkins
@@ -443,23 +357,13 @@ S:AddCallbackForAddon("DBM-Core", "DBM-Core", function()
 		S:Unhook(self, "Show")
 	end)
 
-	if backportVersion then
-		S:RawHook(DBM, "AddWarning", function(self, text, ...)
-			if find(text, " |T") then
-				text = gsub(text, "(:12:12)", ":18:18:0:0:64:64:5:59:5:59")
-			end
+	S:RawHook("RaidNotice_AddMessage", function(noticeFrame, textString, colorInfo)
+		if find(textString, " |T") then
+			textString = gsub(textString, "(:12:12)", ":18:18:0:0:64:64:5:59:5:59")
+		end
 
-			return S.hooks[DBM].AddWarning(self, text, ...)
-		end)
-	else
-		S:RawHook("RaidNotice_AddMessage", function(noticeFrame, textString, colorInfo)
-			if find(textString, " |T") then
-				textString = gsub(textString, "(:12:12)", ":18:18:0:0:64:64:5:59:5:59")
-			end
-
-			return S.hooks.RaidNotice_AddMessage(noticeFrame, textString, colorInfo)
-		end, true)
-	end
+		return S.hooks.RaidNotice_AddMessage(noticeFrame, textString, colorInfo)
+	end, true)
 
 	if DBM.ShowUpdateReminder then
 		S:SecureHook(DBM, "ShowUpdateReminder", function(self)
@@ -484,9 +388,6 @@ end)
 
 S:AddCallbackForAddon("DBM-GUI", "DBM-GUI", function()
 	if not E.private.addOnSkins.DBM then return end
-	local backportVersion2 = GetAddOnMetadata("DBM-GUI","Version") == "1.01"
-	-- if GetAddOnMetadata("DBM-GUI","Version") == "1.01" then return end
-	-- if true then return end
 	DBM_GUI_OptionsFrame:SetTemplate("Transparent")
 
 	DBM_GUI_OptionsFrameHeader:Point("TOP", 0, 7)
@@ -494,16 +395,10 @@ S:AddCallbackForAddon("DBM-GUI", "DBM-GUI", function()
 
 	DBM_GUI_OptionsFramePanelContainer:SetTemplate("Transparent")
 
-	if backportVersion2 then
-		for i = 1, #DBM_GUI.tabs do -- can be variable
-			S:HandleTab(_G["DBM_GUI_OptionsFrameTab" .. i])
-		end
-	else
-		S:HandleTab(DBM_GUI_OptionsFrameTab1)
-		S:HandleTab(DBM_GUI_OptionsFrameTab2)
-	end
+	S:HandleTab(DBM_GUI_OptionsFrameTab1)
+	S:HandleTab(DBM_GUI_OptionsFrameTab2)
 
-	DBM_GUI_OptionsFrameTab1:Point("BOTTOMLEFT", backportVersion2 and DBM_GUI_OptionsFrameList or DBM_GUI_OptionsFrameBossMods, "TOPLEFT", 6, -4)
+	DBM_GUI_OptionsFrameTab1:Point("BOTTOMLEFT", DBM_GUI_OptionsFrameBossMods, "TOPLEFT", 6, -4)
 	DBM_GUI_OptionsFrameTab1Text:SetPoint("CENTER", 0, 0)
 	DBM_GUI_OptionsFrameTab2Text:SetPoint("CENTER", 0, 0)
 
@@ -516,54 +411,35 @@ S:AddCallbackForAddon("DBM-GUI", "DBM-GUI", function()
 	if DBM_GUI_OptionsFrameWebsiteButton then
 		S:HandleButton(DBM_GUI_OptionsFrameWebsiteButton)
 	end
-	if backportVersion2 then
-		for _, button in ipairs(DBM_GUI_OptionsFrameList.buttons) do
-			S:HandleCollapseTexture(button.toggle)
-		end
-	end
+
 	S:SecureHookScript(DBM_GUI_OptionsFrame, "OnShow", function(self)
+		DBM_GUI_OptionsFrameBossMods:StripTextures()
+		DBM_GUI_OptionsFrameBossMods:SetTemplate("Transparent")
 
-		if backportVersion2 then
-			DBM_GUI_OptionsFrameList:StripTextures()
-			DBM_GUI_OptionsFrameList:SetTemplate("Transparent")
-			S:HandleScrollBar(DBM_GUI_OptionsFrameListListScrollBar)
-			DBM_GUI_OptionsFrameListListScrollBar:Point("TOPRIGHT", 1, -18)
-			DBM_GUI_OptionsFrameListListScrollBar:Point("BOTTOMLEFT", 7, 18)
+		DBM_GUI_OptionsFrameBossModsList:StripTextures()
+		S:HandleScrollBar(DBM_GUI_OptionsFrameBossModsListScrollBar)
+		DBM_GUI_OptionsFrameBossModsListScrollBar:Point("TOPRIGHT", 1, -18)
+		DBM_GUI_OptionsFrameBossModsListScrollBar:Point("BOTTOMLEFT", 7, 18)
 
-			-- CollapseExpandButton skinning doesn't work for UIPanelButtonTemplate2
-			-- for _, button in ipairs(DBM_GUI_OptionsFrameList.buttons) do
-			-- 	S:HandleCollapseExpandButton(button.toggle, "auto")
-			-- 	button.toggle:Point("TOPLEFT", 3, 0)
-			-- end
-		else
-			DBM_GUI_OptionsFrameBossMods:StripTextures()
-			DBM_GUI_OptionsFrameBossMods:SetTemplate("Transparent")
-
-			DBM_GUI_OptionsFrameBossModsList:StripTextures()
-			S:HandleScrollBar(DBM_GUI_OptionsFrameBossModsListScrollBar)
-			DBM_GUI_OptionsFrameBossModsListScrollBar:Point("TOPRIGHT", 1, -18)
-			DBM_GUI_OptionsFrameBossModsListScrollBar:Point("BOTTOMLEFT", 7, 18)
-
-			for _, button in ipairs(DBM_GUI_OptionsFrameBossMods.buttons) do
-				if(S and S.HandleCollapseExpandButton) then
-					S:HandleCollapseExpandButton(button.toggle, "auto")
-					button.toggle:Point("TOPLEFT", 3, 0)
-				end
+		for _, button in ipairs(DBM_GUI_OptionsFrameBossMods.buttons) do
+			if(S and S.HandleCollapseExpandButton) then
+				S:HandleCollapseExpandButton(button.toggle, "auto")
+				button.toggle:Point("TOPLEFT", 3, 0)
 			end
+		end
 
-			DBM_GUI_OptionsFrameDBMOptions:StripTextures()
-			DBM_GUI_OptionsFrameDBMOptions:SetTemplate("Transparent")
+		DBM_GUI_OptionsFrameDBMOptions:StripTextures()
+		DBM_GUI_OptionsFrameDBMOptions:SetTemplate("Transparent")
 
-			DBM_GUI_OptionsFrameDBMOptionsList:StripTextures()
-			S:HandleScrollBar(DBM_GUI_OptionsFrameDBMOptionsListScrollBar)
-			DBM_GUI_OptionsFrameDBMOptionsListScrollBar:Point("TOPRIGHT", 1, -18)
-			DBM_GUI_OptionsFrameDBMOptionsListScrollBar:Point("BOTTOMLEFT", 7, 18)
+		DBM_GUI_OptionsFrameDBMOptionsList:StripTextures()
+		S:HandleScrollBar(DBM_GUI_OptionsFrameDBMOptionsListScrollBar)
+		DBM_GUI_OptionsFrameDBMOptionsListScrollBar:Point("TOPRIGHT", 1, -18)
+		DBM_GUI_OptionsFrameDBMOptionsListScrollBar:Point("BOTTOMLEFT", 7, 18)
 
-			for _, button in ipairs(DBM_GUI_OptionsFrameDBMOptions.buttons) do
-				if(S and S.HandleCollapseExpandButton) then
-					S:HandleCollapseExpandButton(button.toggle, "auto")
-					button.toggle:Point("TOPLEFT", 3, 0)
-				end
+		for _, button in ipairs(DBM_GUI_OptionsFrameDBMOptions.buttons) do
+			if(S and S.HandleCollapseExpandButton) then
+				S:HandleCollapseExpandButton(button.toggle, "auto")
+				button.toggle:Point("TOPLEFT", 3, 0)
 			end
 		end
 
@@ -610,12 +486,12 @@ S:AddCallbackForAddon("DBM-GUI", "DBM-GUI", function()
 			S:HandleSliderFrame(slider)
 			return slider
 		end)
-	S:RawHook(PanelPrototype, "CreateButton", function(this, ...)
+		S:RawHook(PanelPrototype, "CreateButton", function(this, ...)
 			local button = S.hooks[PanelPrototype].CreateButton(this, ...)
 			S:HandleButton(button)
 			return button
 		end)
-	--]]
+--]]
 		S:Unhook(DBM_GUI, "CreateNewPanel")
 
 		return panel
