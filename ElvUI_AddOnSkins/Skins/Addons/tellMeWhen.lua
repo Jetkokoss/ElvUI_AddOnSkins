@@ -7,7 +7,7 @@ if not AS:IsAddonLODorEnabled("TellMeWhen") then return end
 local _G = _G
 local unpack = unpack
 
--- TellMeWhen 1.2.8
+-- TellMeWhen 1.2.7
 -- https://github.com/fxpw/TMW_Sirus
 
 S:AddCallbackForAddon("TellMeWhen", "TellMeWhen", function()
@@ -15,7 +15,7 @@ S:AddCallbackForAddon("TellMeWhen", "TellMeWhen", function()
 
 	TELLMEWHEN_ICONSPACING = E.Border
 
-	if TELLMEWHEN_VERSION == "1.2.8" then
+	if TELLMEWHEN_VERSION == "1.3.5" then
 		hooksecurefunc("TellMeWhen_Group_Update", function(groupID)
 			local group = TellMeWhen_Settings.Groups[groupID] or TellMeWhen_Group_Defaults
 			if not group.Enabled then return end
