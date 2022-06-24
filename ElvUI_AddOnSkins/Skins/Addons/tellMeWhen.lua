@@ -12,7 +12,7 @@ local unpack = unpack
 
 S:AddCallbackForAddon("TellMeWhen", "TellMeWhen", function()
 	if not E.private.addOnSkins.TellMeWhen then return end
-
+	if true then return end
 	TELLMEWHEN_ICONSPACING = E.Border
 
 	if TELLMEWHEN_VERSION == "1.3.5" then
