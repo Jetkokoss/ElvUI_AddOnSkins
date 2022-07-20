@@ -456,40 +456,29 @@ if AS:IsAddonLODorEnabled("Details") then
 
 	local function EmbedWindow(window, width, height, point, relativeFrame, relativePoint, ofsx, ofsy)
 		if not window then return end
-		ofsy = -3
 		if not window:IsEnabled() then
 			window:EnableInstance()
 		end
-
 		window._ElvUIEmbed = true
-
 		if window.bars_grow_direction == 2 then
 			ofsy = -2
 		else
 			ofsy = -20
 		end
-
 		window:UngroupInstance()
-
 		window.baseframe:ClearAllPoints()
 		window.baseframe:SetParent(relativeFrame)
 		window.baseframe:SetFrameStrata(relativeFrame:GetFrameStrata())
 		window.baseframe:SetFrameLevel(relativeFrame:GetFrameLevel())
-
 		ofsx = ofsx - 1
-
 		if window.show_statusbar then
 			height = height - 13
 		end
-
 		window:SetSize(width, height - 20)
-
 		window.baseframe:SetPoint(point, relativeFrame, relativePoint, ofsx, ofsy)
 		window:SaveMainWindowPosition()
 		window:RestoreMainWindowPosition()
-
 		window:LockInstance(true)
-
 		if window:GetId() == 1 then
 			DetailsRowFrame1:SetParent(DetailsBaseFrame1)
 			DetailsRowFrame1:SetFrameLevel(DetailsBaseFrame1:GetFrameLevel() + 1)
