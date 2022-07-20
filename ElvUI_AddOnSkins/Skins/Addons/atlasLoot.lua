@@ -340,8 +340,8 @@ S:AddCallbackForAddon("AtlasLoot", "AtlasLoot", function()
 
 
 
-hooksecurefunc("AtlasLoot_DisplayChangelog",changelogatasloothook)
-hooksecurefunc("AtlasLoot_DisplayHelp",helpatasloothook)
+	hooksecurefunc("AtlasLoot_DisplayChangelog",changelogatasloothook)
+	hooksecurefunc("AtlasLoot_DisplayHelp",helpatasloothook)
 
 
 	AtlasLootDefaultFrame:HookScript("OnShow", function()
@@ -353,48 +353,45 @@ hooksecurefunc("AtlasLoot_DisplayHelp",helpatasloothook)
 		-- local pushtex =_G["AtlasLootDefaultFrameSearchButtonFilter"]:SetPushedTexture("Interface\\Buttons\\click")
 		-- _G["AtlasLootDefaultFrameSearchButtonFilter"]:SetTexCoord(unpack(E.TexCoords))
 		-- _G["AtlasLootDefaultFrameSearchButtonFilter"]:SetText("ф")
-			_G["AtlasLootDefaultFrameSearchButtonFilter"]:HookScript("OnClick",function()
-				_G["AtlasLootDefaultFrameFilter"]:StripTextures()
-				_G["AtlasLootDefaultFrameFilter"]:CreateBackdrop("Transparent")
+		_G["AtlasLootDefaultFrameSearchButtonFilter"]:HookScript("OnClick",function()
+			_G["AtlasLootDefaultFrameFilter"]:StripTextures()
+			_G["AtlasLootDefaultFrameFilter"]:CreateBackdrop("Transparent")
 
-				local checkboxes = {
-					"AtlasLootCheckButtonFilterEnable",
-					"AtlasLootCheckButtonCloth",
-					"AtlasLootCheckButtonLeather",
-					"AtlasLootCheckButtonMail",
-					"AtlasLootCheckButtonPlate",
-					"AtlasLootCheckButtonWeapon",
-					"AtlasLootCheckButton2Weapon",
-					"AtlasLootCheckButtonMainHand",
-					"AtlasLootCheckButtonOffHand",
-					-- "AtlasLootCheckButtonFilterEnable",
-					-- "AtlasLootCheckButtonFilterEnable",
-					-- "AtlasLootCheckButtonFilterEnable",
-					-- "AtlasLootCheckButtonFilterEnable",
-				}
-				for _,checkbox in ipairs(checkboxes) do
-					checkbox = _G[checkbox]
-					if checkbox then
-						S:HandleCheckBox(checkbox)					
-					end
+			local checkboxes = {
+				"AtlasLootCheckButtonFilterEnable",
+				"AtlasLootCheckButtonCloth",
+				"AtlasLootCheckButtonLeather",
+				"AtlasLootCheckButtonMail",
+				"AtlasLootCheckButtonPlate",
+				"AtlasLootCheckButtonWeapon",
+				"AtlasLootCheckButton2Weapon",
+				"AtlasLootCheckButtonMainHand",
+				"AtlasLootCheckButtonOffHand",
+				-- "AtlasLootCheckButtonFilterEnable",
+				-- "AtlasLootCheckButtonFilterEnable",
+				-- "AtlasLootCheckButtonFilterEnable",
+				-- "AtlasLootCheckButtonFilterEnable",
+			}
+			for _,checkbox in ipairs(checkboxes) do
+				checkbox = _G[checkbox]
+				if checkbox then
+					S:HandleCheckBox(checkbox)
 				end
-
-				local editboxes = {
-					"AtlasLootDefaultFrameFilterBoxIlvlFrom",
-					"AtlasLootDefaultFrameFilterBoxIlvlBefore",
-					"AtlasLootDefaultFrameFilterBoxlvlFrom",
-					"AtlasLootDefaultFrameFilterBoxlvlBefore",
-					}
-					for _,editbox in ipairs(editboxes) do
-						editbox = _G[editbox]
-						if editbox then
-							S:HandleEditBox(editbox)
-						end
-					end
+			end
+			editboxes = {
+				"AtlasLootDefaultFrameFilterBoxIlvlFrom",
+				"AtlasLootDefaultFrameFilterBoxIlvlBefore",
+				"AtlasLootDefaultFrameFilterBoxlvlFrom",
+				"AtlasLootDefaultFrameFilterBoxlvlBefore",
+				}
+			for _,editbox in ipairs(editboxes) do
+				editbox = _G[editbox]
+				if editbox then
+					S:HandleEditBox(editbox)
+				end
+			end
 		end)
-
 	end)
-
 	AtlasLootDefaultFrame_LockButton:Point("BOTTOM", AtlasLootDefaultFrame_CloseButton, "BOTTOM", 0, -20)
 	AtlasLootDefaultFrame_LockButton:SetHitRectInsets(6, 6, 6, 6)
 

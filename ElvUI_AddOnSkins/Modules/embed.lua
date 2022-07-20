@@ -456,7 +456,7 @@ if AS:IsAddonLODorEnabled("Details") then
 
 	local function EmbedWindow(window, width, height, point, relativeFrame, relativePoint, ofsx, ofsy)
 		if not window then return end
-
+		ofsy = -3
 		if not window:IsEnabled() then
 			window:EnableInstance()
 		end

@@ -4,8 +4,8 @@ local AS = E:GetModule("AddOnSkins")
 
 if not AS:IsAddonLODorEnabled("TellMeWhen") then return end
 
-local _G = _G
-local unpack = unpack
+-- local _G = _G
+-- local unpack = unpack
 
 -- TellMeWhen 1.2.7
 -- https://github.com/fxpw/TMW_Sirus
