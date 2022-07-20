@@ -28,7 +28,7 @@ ignore = {
 	"211/[E|L|V|P|G]",		-- Unused local variable
 	"213/i",				-- Unused loop variable
 	"432/self",				-- Shadowing an upvalue
-
+	"312/ofsy",
 	"113",
 	"131",
 	"421",
