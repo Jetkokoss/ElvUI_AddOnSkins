@@ -15,7 +15,6 @@ S:AddCallbackForAddon("ItemRack", "ItemRack", function()
 
 	local frames = {
 		"ItemRackOptFrame",
-		
 		-- "ItemRackOptSubFrame1",
 		-- "ItemRackOptSubFrame2",
 		}
@@ -57,7 +56,7 @@ S:AddCallbackForAddon("ItemRack", "ItemRack", function()
 
 			end
 	end
-	local frames = {
+	frames = {
 		"ItemRackOptSubFrame1",
 		"ItemRackOptSubFrame2",
 		"ItemRackOptBindFrame",
@@ -85,7 +84,7 @@ S:AddCallbackForAddon("ItemRack", "ItemRack", function()
 
 
 
-	local frames = {
+	frames = {
 		"ItemRackOptList1",
 		"ItemRackOptList2",
 		"ItemRackOptList3",
@@ -109,9 +108,9 @@ S:AddCallbackForAddon("ItemRack", "ItemRack", function()
 			end
 		end
 
-	local frames = {
+	frames = {
 		"ItemRackOptSetsName",
-		
+
 		}
 		for _,frame in ipairs(frames) do
 			frame = _G[frame]
@@ -122,8 +121,8 @@ S:AddCallbackForAddon("ItemRack", "ItemRack", function()
 			end
 		end
 
-	local frames = {
-		
+	frames = {
+
 		-- "ItemRackOptSetListFrame",
 		-- "ItemRackOptSetListFrameScrollChildFrame",
 		-- "ItemRackOptSetListsFrame",
@@ -155,7 +154,6 @@ S:AddCallbackForAddon("ItemRack", "ItemRack", function()
 	local tabs = {
 		"ItemRackOptTab1",
 		"ItemRackOptTab2",
-
 		}
 		for _,tab in ipairs(tabs) do
 			tab = _G[tab]
@@ -166,51 +164,43 @@ S:AddCallbackForAddon("ItemRack", "ItemRack", function()
 
 	local ScrollBars = {
 		"ItemRackOptListScrollFrameScrollBar",
-		
-
-
 		}
-		for _,ScrollBar in ipairs(ScrollBars) do
-			ScrollBar = _G[ScrollBar]
-			if ScrollBar then
-				S:HandleScrollBar(ScrollBar)
-				ScrollBar:ClearAllPoints()
-				ScrollBar:SetPoint("TOPLEFT", ItemRackOptListScrollFrame, "TOPRIGHT", 45, -16)
-				ScrollBar:SetPoint("BOTTOMLEFT", ItemRackOptListScrollFrame, "BOTTOMRIGHT", 45, 16)
-
-			end
-		end
-
-
-		local ScrollBars = {			
-			"ItemRackOptSetsIconScrollFrameScrollBar",
-			}
-			for _,ScrollBar in ipairs(ScrollBars) do
-				ScrollBar = _G[ScrollBar]
-				if ScrollBar then
-					S:HandleScrollBar(ScrollBar)
-				end
-			end
-
-			local dropdownArrowColor = {1, 0.8, 0}
-			S:HandleNextPrevButton(ItemRackOptSetsDropDownButton, "down", dropdownArrowColor)
-			ItemRackOptSetsDropDownButton:Size(21)
-			ItemRackOptSetsDropDownButton:ClearAllPoints()
-			ItemRackOptSetsDropDownButton:SetPoint("TOPRIGHT", ItemRackOptSetsDropTextureRight, "TOPRIGHT", -20, -20)
-
-
-
-
-	for i = 1,11 do
-
-			local checkbox = "ItemRackOptList"..i.."CheckButton"
-			checkbox = _G[checkbox]
-			if checkbox then
-				S:HandleCheckBox(checkbox)
+	for _,ScrollBar in ipairs(ScrollBars) do
+		ScrollBar = _G[ScrollBar]
+		if ScrollBar then
+			S:HandleScrollBar(ScrollBar)
+			ScrollBar:ClearAllPoints()
+			ScrollBar:SetPoint("TOPLEFT", ItemRackOptListScrollFrame, "TOPRIGHT", 45, -16)
+			ScrollBar:SetPoint("BOTTOMLEFT", ItemRackOptListScrollFrame, "BOTTOMRIGHT", 45, 16)
 
 		end
 	end
 
+
+	ScrollBars = {
+		"ItemRackOptSetsIconScrollFrameScrollBar",
+		}
+	for _,ScrollBar in ipairs(ScrollBars) do
+		ScrollBar = _G[ScrollBar]
+		if ScrollBar then
+			S:HandleScrollBar(ScrollBar)
+		end
+	end
+
+	local dropdownArrowColor = {1, 0.8, 0}
+	S:HandleNextPrevButton(ItemRackOptSetsDropDownButton, "down", dropdownArrowColor)
+	ItemRackOptSetsDropDownButton:Size(21)
+	ItemRackOptSetsDropDownButton:ClearAllPoints()
+	ItemRackOptSetsDropDownButton:SetPoint("TOPRIGHT", ItemRackOptSetsDropTextureRight, "TOPRIGHT", -20, -20)
+
+
+	for i = 1,11 do
+		local checkbox = "ItemRackOptList"..i.."CheckButton"
+		checkbox = _G[checkbox]
+		if checkbox then
+			S:HandleCheckBox(checkbox)
+		end
+	end
 
 	local sliders = {
 		"ItemRackOptButtonSpacingSlider",
@@ -273,49 +263,25 @@ S:AddCallbackForAddon("ItemRack", "ItemRack", function()
 				S:HandleButton(button)
 			end
 		end
-
-	-- for i = 0,19 do
-	-- 	-- for i = 1,11 do
-
-	-- 		-- local icon = "ItemRackOptInv"..i.."Border"
-	-- 		-- icon = _G[icon]
-	-- 		-- if icon then
-	-- 		-- 	-- icon:StripTextures()
-	-- 		-- 	-- icon:SetDrawLayer("BORDER")
-	-- 		-- -- S:HandleCheckBox(icon)
-	-- 		-- end
-	-- 		local icon = "ItemRackOptInv"..i.."Icon"
-	-- 		icon = _G[icon]
-	-- 		if icon then
-	-- 			-- icon:StripTextures()
-	-- 			-- icon:SetDrawLayer("BORDER")
-	-- 			S:HandleIcon(icon)
-	-- 		end
-
-	-- end
-	----------------------------
-	----------------------------2 frame
-	
-	local buttons = {
+	buttons = {
 		"ItemRackOptSetsBindButton",
 		"ItemRackOptSetsDeleteButton",
 		"ItemRackOptSetsSaveButton",
 		}
 
-		for _,button in ipairs(buttons) do
-			button = _G[button]
-			if button then
-				S:HandleButton(button)
-			end
+	for _,button in ipairs(buttons) do
+		button = _G[button]
+		if button then
+			S:HandleButton(button)
 		end
-		_G["ItemRackOptSetsBindButton"]:SetText("Связать")
-		_G["ItemRackOptSetsDeleteButton"]:ClearAllPoints()
-		_G["ItemRackOptSetsDeleteButton"]:SetPoint("TOPRIGHT", ItemRackOptSetsSaveButton, "TOPLEFT", -4, 0)
+	end
+	_G["ItemRackOptSetsBindButton"]:SetText("Связать")
+	_G["ItemRackOptSetsDeleteButton"]:ClearAllPoints()
+	_G["ItemRackOptSetsDeleteButton"]:SetPoint("TOPRIGHT", ItemRackOptSetsSaveButton, "TOPLEFT", -4, 0)
 
 
 
 	end --end func
-
 	hooksecurefunc(ItemRack,'ToggleOptions',ItemRackOptFrame_onshow)
 
 

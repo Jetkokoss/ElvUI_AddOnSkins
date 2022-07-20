@@ -10,7 +10,6 @@ if not AS:IsAddonLODorEnabled("Auctionator") then return end
 
 local _G = _G
 
-SetTexCoord = SetTexCoord
 -- TimeSinceLastUpdate = 0
 -- MyAddon_UpdateInterval = 11.1
 local proverkafuncfirsttab = 1
@@ -36,7 +35,7 @@ local function handlebuttonsselltab()
 					button.Icon:StripTextures()
 					button.IconBorder:StripTextures()
 					button.Icon:SetTexture(button.itemInfo.iconTexture)
-    				button.Icon:Show()
+					button.Icon:Show()
 					button.Icon:SetTexCoord(unpack(E.TexCoords))
 					button.Text:SetDrawLayer("BORDER")
 					button.Text:SetText(button.itemInfo.count)
@@ -389,7 +388,7 @@ local function firsauctttab()
 			end
 		end
 		--frames createback
-		local frames = {
+		frames = {
 			-- "AuctionatorShoppingListFrameScrollListScrollFrame",
 			-- "AuctionatorShoppingListFrameResultsListingScrollFrame",
 			"AuctionatorShoppingListFrameShoppingResultsInsetNineSlice",

@@ -6,7 +6,7 @@ if not AS:IsAddonLODorEnabled("WIM") then return end
 
 local format = string.format
 -- update1sliderframehook = 1
-local dropdownArrowColor = {1, 0.8, 0}
+-- local dropdownArrowColor = {1, 0.8, 0}
 -- WIM 3.3.7
 -- https://www.wowace.com/projects/wim-3/files/439176
 

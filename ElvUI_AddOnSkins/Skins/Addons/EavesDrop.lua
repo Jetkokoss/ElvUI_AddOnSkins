@@ -52,34 +52,4 @@ S:AddCallbackForAddon("EavesDrop", "EavesDrop", function()
 			textc:SetTexCoord(unpack(E.TexCoords))
 		end
 	end
-	-- local f = EavesDropFrame
-	-- f:SetResizable(true)
-	-- f:SetMinResize(120, 160)
-	-- f:SetMaxResize(460, 360)
-	-- local sizer = CreateFrame("Button", "EDFSizer", f)
-	-- sizer:SetHeight(16)
-	-- sizer:SetWidth(16)
-	-- sizer:SetPoint("BOTTOMRIGHT", f, "BOTTOMRIGHT", 0, 0)
-	-- sizer:SetScript(
-	--   "OnMouseDown",
-	--   function (self) self:GetParent():StartSizing("BOTTOMRIGHT") end)
-	-- sizer:SetScript(
-	--   "OnMouseUp", function (self) self:GetParent():StopMovingOrSizing() end)
-  
-	-- local line1 = sizer:CreateTexture(nil, "BACKGROUND")
-	-- line1:SetWidth(14)
-	-- line1:SetHeight(14)
-	-- line1:SetPoint("BOTTOMRIGHT", 0, 0)
-	-- line1:SetTexture("Interface\\Tooltips\\UI-Tooltip-Border")
-	-- local x = 0.1 * 14/17
-	-- line1:SetTexCoord(0.05 - x, 0.5, 0.05, 0.5 + x, 0.05, 0.5 - x, 0.5 + x, 0.5)
-  
-	-- local line2 = sizer:CreateTexture(nil, "BACKGROUND")
-	-- line2:SetWidth(8)
-	-- line2:SetHeight(8)
-	-- line2:SetPoint("BOTTOMRIGHT", 0, 0)
-	-- line2:SetTexture("Interface\\Tooltips\\UI-Tooltip-Border")
-	-- local x = 0.1 * 8/17
-	-- line2:SetTexCoord(0.05 - x, 0.5, 0.05, 0.5 + x, 0.05, 0.5 - x, 0.5 + x, 0.5)
-
 end)

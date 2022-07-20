@@ -2,13 +2,9 @@ local E, L, V, P, G = unpack(ElvUI)
 local S = E:GetModule("Skins")
 local AS = E:GetModule("AddOnSkins")
 
-local epgpaisload = IsAddOnLoaded("EPGPAttandance")
+-- local epgpaisload = IsAddOnLoaded("EPGPAttandance")
 
 if not AS:IsAddonLODorEnabled("epgp") then return end
-
---
---
-
 
 local function epgpat_onshow()
 	-- if EPGPAttendanceFrame then
@@ -19,7 +15,7 @@ local function epgpat_onshow()
 			S:HandleScrollBar(ScrollTable4ScrollFrameScrollBar)
 	-- 	end
 	-- end
-	
+
 
 		local frames = {
 			-- "ScrollTable1ScrollFrame",
@@ -66,7 +62,7 @@ local function epgpat_onshow()
 			end
 		end
 
-		
+
 		-- local frames = {
 		-- 	"ScrollTable1ScrollFrameScrollChildFrame",
 		-- 	"ScrollTable2ScrollFrameScrollChildFrame",
@@ -213,7 +209,7 @@ S:AddCallbackForAddon("epgp", "epgp", function()
 		EPGPLogFrame:SetMaxResize(1200, 424)
 		EPGPLogFrame:Point("TOPLEFT", EPGPFrame, "TOPRIGHT", -33, -12)
 
-		local sizer, closeButton2, export, import, trimLog, undo, redo, scrollParent,epgpa = EPGPLogFrame:GetChildren()
+		local sizer, closeButton2, export, import, trimLog, undo, redo, scrollParent = EPGPLogFrame:GetChildren()
 
 		S:HandleCloseButton(closeButton2, EPGPLogFrame)
 
@@ -305,16 +301,9 @@ S:AddCallbackForAddon("epgp", "epgp", function()
 				EPGPAT:SetPoint("RIGHT", import, "RIGHT",90,0)
 				hooksecurefunc(EPGPAttendance,"ShowFrameAndCurrentPage",epgpat_onshow)
 			end
-
-			
 		-- end
 
 	end
-	-- EPGPAttendanceFrame = _G[EPGPAttendanceFrame]
-	
-		-- EPGPAttendanceFrame:SetScript("OnShow",epgpat_onshow)
-	
-
 	if EPGPFrame then
 		SkinEPGP()
 	else
@@ -323,8 +312,4 @@ S:AddCallbackForAddon("epgp", "epgp", function()
 			S:Unhook(self, "OnEnable")
 		end)
 	end
-
-
-	
-
 end)

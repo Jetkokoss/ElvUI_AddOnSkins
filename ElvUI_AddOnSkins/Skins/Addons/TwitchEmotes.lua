@@ -15,9 +15,4 @@ S:AddCallbackForAddon("TwitchEmotes", "TwitchEmotes", function()
 	L_DropDownList2:SetTemplate("Transparent")
 	L_DropDownList1MenuBackdrop:SetTemplate("Transparent")
 	L_DropDownList2MenuBackdrop:SetTemplate("Transparent")
-
-		
-
-	
-
 	end)

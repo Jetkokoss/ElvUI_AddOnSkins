@@ -91,8 +91,8 @@ S:AddCallbackForAddon("Atlas", "Atlas", function()
 			-- S:HandleButton(_G["AtlasLootDefaultFrameSearchButtonFilterAtlas"])
 			_G["AtlasLootDefaultFrameSearchButtonFilterAtlas"]:ClearAllPoints()
 			_G["AtlasLootDefaultFrameSearchButtonFilterAtlas"]:SetPoint("LEFT", AtlasLootSearchButton, "RIGHT", -90, 0)
-			local normtex = _G["AtlasLootDefaultFrameSearchButtonFilterAtlas"]:SetNormalTexture("Interface\\Buttons\\on")
-			local pushtex =_G["AtlasLootDefaultFrameSearchButtonFilterAtlas"]:SetPushedTexture("Interface\\Buttons\\click")
+			-- local normtex = _G["AtlasLootDefaultFrameSearchButtonFilterAtlas"]:SetNormalTexture("Interface\\Buttons\\on")
+			-- local pushtex =_G["AtlasLootDefaultFrameSearchButtonFilterAtlas"]:SetPushedTexture("Interface\\Buttons\\click")
 			-- _G["AtlasLootDefaultFrameSearchButtonFilterAtlas"]:Width(25)
 			-- _G["AtlasLootDefaultFrameSearchButtonFilterAtlas"]:SetText("ф")
 				_G["AtlasLootDefaultFrameSearchButtonFilterAtlas"]:HookScript("OnClick",function()
@@ -117,7 +117,7 @@ S:AddCallbackForAddon("Atlas", "Atlas", function()
 					for _,checkbox in ipairs(checkboxes) do
 						checkbox = _G[checkbox]
 						if checkbox then
-							S:HandleCheckBox(checkbox)					
+							S:HandleCheckBox(checkbox)
 						end
 					end
 

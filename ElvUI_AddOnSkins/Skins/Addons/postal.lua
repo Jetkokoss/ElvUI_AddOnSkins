@@ -6,7 +6,7 @@ if not AS:IsAddonLODorEnabled("Postal") then return end
 
 local _G = _G
 local select = select
-local unpack = unpack
+-- local unpack = unpack
 
 local hooksecurefunc = hooksecurefunc
 

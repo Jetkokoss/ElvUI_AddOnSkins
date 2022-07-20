@@ -17,7 +17,7 @@ S:AddCallbackForAddon("RaidBrowser", "RaidBrowser", function()
 	S:HandleScrollBar(LFRHistoryFrameScrollFrameScrollBar)
 	LFRHistoryFrameScrollFrameScrollBarBorder:StripTextures()
 	BARaidBrowserEditSpec:SetTemplate("Transparent")
-	for i = 1,5 do 
+	for i = 1,5 do
 		S:HandleCheckBox(_G["LFRHistoryFrameCheckButton"..i])
 	end
 	BARaidBrowserEditName:SetTemplate("Transparent")
