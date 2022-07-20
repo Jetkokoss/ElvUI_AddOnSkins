@@ -5,7 +5,7 @@ local AS = E:GetModule("AddOnSkins")
 if not AS:IsAddonLODorEnabled("Atlas") then return end
 
 -- Atlas 1.18.2 for sirus
---https://github.com/fxpw/Atlas-Sirus 
+--https://github.com/fxpw/Atlas-Sirus
 
 S:AddCallbackForAddon("Atlas", "Atlas", function()
 	if not E.private.addOnSkins.Atlas then return end
